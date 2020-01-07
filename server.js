@@ -1,6 +1,14 @@
 const express = require("express");
+const connectDB = require("./config/db");
+const { check, validationResult } = require("express-validator/check");
 
 const app = express();
+
+// Connect Database
+connectDB();
+
+// Init MIddleware
+app.use(express.json({ extended: false }));
 
 app.get("/", (req, res) => {
   res.json({ msg: "Welcome to the Contact Keeper API" });
