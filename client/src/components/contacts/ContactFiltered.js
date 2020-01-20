@@ -20,6 +20,7 @@ const ContactFiltered = () => {
       clearFilter();
     }
   };
+
   return (
     <form>
       <input
