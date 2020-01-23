@@ -74,8 +74,14 @@ router.put("/:id", (req, res) => {
 // @description    Update contact
 // @acces          Private
 
-router.delete("/:id", (req, res) => {
-  res.send("Delete contact");
+router.delete("/:id", (req, res, next) => {
+  Contact.deleteOne({ _id: req.params.id })
+    .then(() => {
+      res.status(200).json({ message: "Deleted!" });
+    })
+    .catch(error => {
+      res.status(400).json({ error: error });
+    });
 });
 
 module.exports = router;
