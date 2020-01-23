@@ -1,13 +1,12 @@
 import React, { useState, useContext, useEffect } from "react";
 import ContactContext from "../../context/contact/contactContext";
 
-export const ContactForm = () => {
+const ContactForm = () => {
   const contactContext = useContext(ContactContext);
-
-  const { addContact, updateContact, clearCurrent, current } = contactContext;
+  const { addContact, current, clearCurrent, updateContact } = contactContext;
 
   useEffect(() => {
-    if (current != null) {
+    if (current !== null) {
       setContact(current);
     } else {
       setContact({
@@ -38,12 +37,7 @@ export const ContactForm = () => {
     } else {
       updateContact(contact);
     }
-    setContact({
-      name: "",
-      email: "",
-      phone: "",
-      type: "personal"
-    });
+    clearAll();
   };
 
   const clearAll = () => {
@@ -76,14 +70,14 @@ export const ContactForm = () => {
         value={phone}
         onChange={onChange}
       />
-      <h5>Contact type</h5>
+      <h5>Contact Type</h5>
       <input
         type='radio'
         name='type'
         value='personal'
         checked={type === "personal"}
         onChange={onChange}
-      />
+      />{" "}
       Personal{" "}
       <input
         type='radio'
@@ -91,8 +85,8 @@ export const ContactForm = () => {
         value='professional'
         checked={type === "professional"}
         onChange={onChange}
-      />
-      Professional
+      />{" "}
+      Professional{" "}
       <div>
         <input
           type='submit'
@@ -100,6 +94,7 @@ export const ContactForm = () => {
           className='btn btn-primary btn-block'
         />
       </div>
+      {/**Clear Button only if 'current' is not null */}
       {current && (
         <div>
           <button className='btn btn-light btn-block' onClick={clearAll}>
